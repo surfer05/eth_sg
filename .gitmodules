@@ -1,0 +1,3 @@
+[submodule "fhenixContracts/lib/forge-std"]
+	path = fhenixContracts/lib/forge-std
+	url = https://github.com/foundry-rs/forge-std
