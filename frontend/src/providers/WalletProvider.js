@@ -22,7 +22,7 @@ const WalletProvider = ({ children }) => {
   return (
     <DynamicContextProvider
       settings={{
-        environmentId: "09165584-bc97-4467-b391-c54fa06a4516",
+        environmentId: "49c5da58-cbd1-4a7b-b21f-7f0951e78404",
         walletConnectors: [EthereumWalletConnectors],
       }}
     >
