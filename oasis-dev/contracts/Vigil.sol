@@ -45,7 +45,7 @@ contract Vigil {
     function performOperation(
         uint256 index,
         uint[] calldata operations
-    ) view {
+    ) public view {
         require(index < _metas.length);
         require(msg.sender == _metas[index].creator);
 
