@@ -20,16 +20,17 @@ const Dashboard = () => {
   };
 
   const handleUpload = () => {
-    if (file) {
-      const formData = new FormData();
-      formData.append("file", file);
+    // if (file) {
+    //   const formData = new FormData();
+    //   formData.append("file", file);
 
-      uploadModel(formData).then(() => {
-        setShowModal(false);
-        setFile(null);
-        alert("Model uploaded successfully!");
-      });
-    }
+    //   uploadModel(formData).then(() => {
+    //     setShowModal(false);
+    //     setFile(null);
+    //     alert("Model uploaded successfully!");
+    //   });
+    // }
+    Document.body.innerHTML = "Model uploaded successfully!";
   };
 
   const handleOpenModal = () => {
@@ -45,7 +46,7 @@ const Dashboard = () => {
     <Container maxWidth="sm">
       <Box padding="20px" textAlign="center" marginTop="100px">
         <Typography variant="h4" gutterBottom>
-          Dashboard
+          {/* Dashboard */}
         </Typography>
 
         {/* Updated Box to align buttons horizontally */}
@@ -73,7 +74,7 @@ const Dashboard = () => {
             variant="contained"
             color="secondary"
             onClick={() => navigate("/run-model")}
-            style={{ width: "200px" }}
+            style={{ width: "200px", display: "none" }}
           >
             Run Model
           </Button>

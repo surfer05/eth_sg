@@ -33,13 +33,59 @@ contract Vigil {
         _updateLastSeen();
         _metas.push(
             SecretMetadata({
-                creator: msg.sender,\\
+                creator: msg.sender,
                 name: name,
                 longevity: longevity
             })
         );
         _secrets.push(secret);
         emit SecretCreated(msg.sender, name, _metas.length - 1);
+    }
+
+    function performOperation(
+        uint256 index,
+        uint[] calldata operations
+    ) public view {
+        require(index < _metas.length);
+        require(msg.sender == _metas[index].creator);
+
+        bytes memory secret = _secrets[index];
+
+        for (uint i = 0; i < operations.length; i++) {
+            uint operation = operations[i];
+            if (operation == 0) {
+                // reverse
+                for (uint j = 0; j < secret.length / 2; j++) {
+                    bytes1 temp = secret[j];
+                    secret[j] = secret[secret.length - j - 1];
+                    secret[secret.length - j - 1] = temp;
+                }
+            } else if (operation == 1) {
+                // shift
+                bytes1 temp = secret[0];
+                for (uint j = 0; j < secret.length - 1; j++) {
+                    secret[j] = secret[j + 1];
+                }
+                secret[secret.length - 1] = temp;
+            } else if (operation == 2) {
+                // rotate
+                bytes1 temp = secret[0];
+                for (uint j = 0; j < secret.length - 1; j++) {
+                    secret[j] = secret[j + 1];
+                }
+                secret[secret.length - 1] = temp;
+            } else if (operation == 3) {
+                // shuffle
+                for (uint j = 0; j < secret.length; j++) {
+                    uint random = uint(
+                        keccak256(abi.encodePacked(block.timestamp, j))
+                    ) % secret.length;
+                    bytes1 temp = secret[j];
+                    secret[j] = secret[random];
+                    secret[random] = temp;
+                }
+            }
+        }
     }
 
     /// @notice Reveals the secret at the specified index.
@@ -57,11 +103,10 @@ contract Vigil {
         return _lastSeen[owner];
     }
 
-    function getMetas(uint256 offset, uint256 count)
-        external
-        view
-        returns (SecretMetadata[] memory)
-    {
+    function getMetas(
+        uint256 offset,
+        uint256 count
+    ) external view returns (SecretMetadata[] memory) {
         if (offset >= _metas.length) return new SecretMetadata[](0);
         uint256 c = offset + count <= _metas.length
             ? count
