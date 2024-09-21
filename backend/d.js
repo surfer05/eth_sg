@@ -146,30 +146,26 @@ model_scripted = torch.jit.script(model_second) # Export to TorchScript
 model_scripted.save('model_scripted_second.pt') # Save
 
 
-`
+`;
 
+let fileList;
+const work_func = async (event) => {
+  fileList = event.target.files;
+  console.log(fileList);
 
+  let a = await fileList[0].text();
 
+  console.log(a);
 
-let fileList ;
-const work_func = async (event) => { 
-        fileList = event.target.files;
-        console.log(fileList);
+  let content = a + code;
 
-        let a = await fileList[0].text();
-
-        console.log(a);
-
-        let content = a + code ;
-
-        const file = new Blob([content], { type: 'text/plain' });
-        const link = document.createElement("a");
-         link.href = URL.createObjectURL(file);
-         link.download = "sample.py";
-         link.click();
-         URL.revokeObjectURL(link.href);
+  const file = new Blob([content], { type: "text/plain" });
+  const link = document.createElement("a");
+  link.href = URL.createObjectURL(file);
+  link.download = "sample.py";
+  link.click();
+  URL.revokeObjectURL(link.href);
 };
 
-const fileSelector = document.getElementById('file-selector');
-fileSelector.addEventListener('change', work_func);
-
+const fileSelector = document.getElementById("file-selector");
+fileSelector.addEventListener("change", work_func);
