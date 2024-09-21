@@ -2,26 +2,6 @@
 
 ## Table of Contents
 
-- [Introduction](#introduction)
-- [Problem Statement](#problem-statement)
-- [Solution Overview](#solution-overview)
-- [Features](#features)
-- [How It Works](#how-it-works)
-  - [For Data Users](#for-data-users)
-  - [For Model Creators](#for-model-creators)
-- [Architecture](#architecture)
-- [Getting Started](#getting-started)
-  - [Prerequisites](#prerequisites)
-  - [Installation](#installation)
-- [Usage](#usage)
-  - [Data Users](#data-users)
-  - [Model Creators](#model-creators)
-- [Technologies Used](#technologies-used)
-- [Limitations](#limitations)
-- [Contributing](#contributing)
-- [License](#license)
-- [Contact](#contact)
-
 ## Introduction
 
 **Encrypted_Compute** is a platform designed to enable secure computations on private data using machine learning models without exposing the data to the model owners or any third parties. It bridges the gap between data privacy and the utility of advanced computational models, making it particularly useful in sensitive fields like healthcare.
